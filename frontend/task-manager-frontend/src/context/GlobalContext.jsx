@@ -14,7 +14,7 @@ export function GlobalProvider({ children }) {
             .then(data => {
 
                 // Log to verify correct fetch
-                console.log(data);
+                // console.log(data);
                 setTasks(data);
             })
             .catch(err => console.error("Failed to fetch:", err));
