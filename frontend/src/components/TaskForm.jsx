@@ -11,25 +11,27 @@ const TaskForm = () => {
 
     const symbols = "!@#$%^&*()-_=+[]{}|;:'\\,.<>?/`~";
 
-    // Check if the title is valid (no symbols, at least 1 character)
-    const isTitleValid = useMemo(() => {
-        const validTitle = taskTitle.split("").every(char =>
-            !symbols.includes(char.toLowerCase())
-        );
-        return validTitle && taskTitle.length > 0;
+    const errorMessage = useMemo(() => {
+        if (taskTitle.trim().length === 0) {
+            return 'Il titolo non può essere vuoto';
+        }
+        if (taskTitle.split("").some(char => symbols.includes(char))) {
+            return 'Il titolo non può contenere simboli speciali';
+        }
+        return '';
     }, [taskTitle]);
+
 
 
     // Function that runs when the form is submitted
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (
-            !isTitleValid
-        ) {
-            alert('Per favore compila tutti i campi correttamente.');
+        if (errorMessage) {
+            alert(errorMessage);
             return;
         }
+
 
         const newTask = {
             title: taskTitle,
@@ -50,6 +52,8 @@ const TaskForm = () => {
                         value={taskTitle}
                         onChange={(e) => setTaskTitle(e.target.value)}
                     />
+                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+
                 </label>
                 <br />
                 <label className="description_form">
