@@ -2,7 +2,7 @@ import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
 import TaskRow from "../components/TaskRow";
 
-function AddTask() {
+function TaskList() {
     const { tasks } = useContext(GlobalContext);
 
     return (
@@ -27,4 +27,4 @@ function AddTask() {
     );
 }
 
-export default AddTask;
+export default TaskList;
