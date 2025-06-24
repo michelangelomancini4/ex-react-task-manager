@@ -64,3 +64,58 @@ h2 {
   margin-bottom: 20px;
   color: #333;
 }
+
+/* FORM */
+.form-container {
+  max-width: 500px;
+  margin: 0 auto 40px auto;
+  padding: 24px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: bold;
+  color: #444;
+}
+
+form input[type="text"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+
+
+form button {
+  margin-top: 20px;
+  background-color: #007acc;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+form button:hover {
+  background-color: #005e99;
+}

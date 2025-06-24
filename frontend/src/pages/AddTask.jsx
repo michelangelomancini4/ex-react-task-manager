@@ -1,15 +1,17 @@
-
+import TaskForm from "../components/TaskForm";
 
 function AddTask() {
     return (
         <>
 
-            <div>
+            <div className="form-container">
                 <h1>Aggiungi una Task</h1>
-            </div>
+                <TaskForm />
+            </div >
         </>
 
     );
 }
 
 export default AddTask;
+
