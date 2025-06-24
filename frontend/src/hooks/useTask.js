@@ -19,7 +19,20 @@ export default function useTasks() {
             .catch(err => console.error("Failed to fetch:", err));
     }, []);
 
-    const addTask = () => {
+    const addTask = async newTask => {
+        const response = await fetch(`${url}/tasks`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newTask)
+
+        })
+
+        const { success, message, task } = await response.json();
+        if (!success) throw new Error(message);
+
+        setTasks(prev => [...prev, task])
 
     };
     const removeTask = () => {
@@ -36,8 +49,3 @@ export default function useTasks() {
 
 }
 
-
-
-
-// Integrare useTasks() nel GlobalContext, in modo che tutti i componenti possano accedere ai task e
-// alle funzioni di gestione.

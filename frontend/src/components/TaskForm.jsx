@@ -1,6 +1,10 @@
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo, useContext } from "react";
+import GlobalContext from "../context/GlobalContext";
+
 
 const TaskForm = () => {
+
+    const { addTask } = useContext(GlobalContext);
 
     // controlled input
     const [taskTitle, setTaskTitle] = useState("");
@@ -24,7 +28,7 @@ const TaskForm = () => {
 
 
     // Function that runs when the form is submitted
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (errorMessage) {
@@ -39,7 +43,18 @@ const TaskForm = () => {
             status: statusRef.current.value,
         };
 
-        console.log("Nuova task:", newTask);
+        try {
+
+            await addTask(newTask);
+
+            alert("Task creata!")
+            setTaskTitle("");
+            descriptionRef.current.value = "";
+            statusRef.current.value = ""
+
+        } catch (error) {
+            alert(error.message)
+        }
     };
 
     return (
