@@ -19,6 +19,8 @@ export default function useTasks() {
             .catch(err => console.error("Failed to fetch:", err));
     }, []);
 
+    // POST
+
     const addTask = async newTask => {
         const response = await fetch(`${url}/tasks`, {
             method: 'POST',
@@ -35,9 +37,20 @@ export default function useTasks() {
         setTasks(prev => [...prev, task])
 
     };
-    const removeTask = () => {
 
+
+    // DELETE
+    const removeTask = async taskId => {
+        const response = await fetch(`${url}/tasks/${taskId}`, {
+            method: 'DELETE'
+        });
+
+        const { success, message } = await response.json();
+        if (!success) throw new Error(message);
+
+        setTasks(prev => prev.filter(task => task.id !== taskId));
     };
+
     const updateTask = () => {
 
     };
@@ -48,4 +61,3 @@ export default function useTasks() {
 
 
 }
-

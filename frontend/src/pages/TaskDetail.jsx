@@ -1,29 +1,37 @@
-
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import GlobalContext from "../context/GlobalContext";
-
 
 export default function TaskDetail() {
 
     const { id } = useParams();
-    const { tasks } = useContext(GlobalContext);
+    const { tasks, removeTask } = useContext(GlobalContext);
+    const navigate = useNavigate();
 
-    // Trova il task con quell'id
+    // Find the task with the matching ID
     const task = tasks.find(t => t.id === Number(id));
-    if (!task) return <p>Task non trovato</p>;
+    if (!task) return <p>Task not found</p>;
 
-    function onClick() {
-        console.log('Elimina task!');
-    }
+    // Handle task deletion and redirect to homepage
+    const handleDelete = async () => {
+        try {
+            await removeTask(task.id);
+            alert("Task deleted!");
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
+    };
+
     return (
         <div className="detail-container">
-            <h1>Dettaglio Task</h1>
+            <h1>Task Detail</h1>
             <h2>{task.title}</h2>
             <p>{task.description}</p>
-            <p>Stato: {task.status}</p>
-            <p>Creato il: {new Date(task.createdAt).toLocaleDateString()}</p>
-            <button onClick={onClick}>Elimina task!</button>
+            <p>Status: {task.status}</p>
+            <p>Created on: {new Date(task.createdAt).toLocaleDateString()}</p>
+            <button onClick={handleDelete}>Delete task!</button>
         </div>
     );
 }
