@@ -50,7 +50,7 @@ const TaskForm = () => {
             alert("Task creata!")
             setTaskTitle("");
             descriptionRef.current.value = "";
-            statusRef.current.value = ""
+            statusRef.current.value = "To Do";
 
         } catch (error) {
             alert(error.message)
@@ -80,8 +80,8 @@ const TaskForm = () => {
                 <br />
                 <label>
                     Status:
-                    <select ref={statusRef}>
-                        <option value="To Do">To Do</option>
+                    <select ref={statusRef} defaultValue="To do">
+                        <option value="To do">To Do</option>
                         <option value="Doing">Doing</option>
                         <option value="Done">Done</option>
                     </select>
